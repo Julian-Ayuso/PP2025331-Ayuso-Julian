@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practica2</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <h1>Practica 2</h1>
+    <div id="head">
+        <table border= "" id="tablaPersonas">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Edad</th>
+                <th>Equipo</th>
+                <th>Posición</th>
+                <th>Título</th>
+                <th>Facultad</th>
+                <th>Modificar</th>
+                <th>Eliminar</th>
+            </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+            
+        </table>
+        <br>
+    </div>
+
+    <!-- BOTON AGREGAR -->
+    <button id="btn_agregar">Agregar Elemento</button> 
+    <!-- BOTON AGREGAR -->
+
+    
+    <div id="formulario" class="hidden">
+        <br>
+        <form id="formulario" method="post">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+            <br>
+            <label for="apellido">Apellido:</label>
+            <input type="text" id="apellido" name="apellido" required>
+            <br>
+            <label for="edad">Edad:</label>
+            <input type="number" id="edad" name="edad" required>
+            <br>
+            <label for="equipo">Equipo:</label>
+            <input type="text" id="equipo" name="equipo" required>
+            <br>
+            <label for="posicion">Posición:</label>
+            <input type="text" id="posicion" name="posicion" required>
+            <br>
+            <label for="titulo">Título:</label>
+            <input type="text" id="titulo" name="titulo" required>
+            <br>
+            <label for="facultad">Facultad:</label>
+            <input type="text" id="facultad" name="facultad" required>
+            <br>
+            <button id ="enviar">Enviar</button>
+        </form>
+
+    </div>
+</body>
+<div id="spinner" class="hidden">
+        <div></div>
+    </div>
+<script src="app.js"></script>
+</html>

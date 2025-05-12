@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <form id="FormLista">
+        <label>Formulario Lista</label><br>
+        <label>Filtrar Por:</label>
+        <select id="Filtro">
+            <option value="1">Todos</option>
+            <option value="2">Futbolistas</option>
+            <option value="3">Profesionales</option>
+        </select><br>
+        <label>Calcular edad Promedio:</label>
+        <input id="Txt_Promedio" type="text">
+        <button id="Btn_Calcular" type="button">Calcular</button><br>
+        <label>Mostrar Columnas:</label><br>
+        <input id="Chk_Id" type="checkbox" checked><label>ID</label>
+        <input id="Chk_Nombre" type="checkbox" checked><label>Nombre</label>
+        <input id="Chk_Apellido" type="checkbox" checked><label>Apellido</label>
+        <input id="Chk_Edad" type="checkbox" checked><label>Edad</label>
+        <input id="Chk_Equipo" type="checkbox" checked><label>Equipo</label>
+        <input id="Chk_Posicion" type="checkbox" checked><label>Posicion</label><br>
+        <input id="Chk_Goles" type="checkbox" checked><label>Cantidad Goles</label>
+        <input id="Chk_Titulo" type="checkbox" checked><label>Titulo</label>
+        <input id="Chk_Facultad" type="checkbox" checked><label>Facultad</label>
+        <input id="Chk_Graduacion" type="checkbox" checked><label>Fecha Graduacion</label>
+        <br>
+        <table id="Table">
+            <thead>
+                <tr>
+                    <th id="Th_Id" columna="ID">ID</th>
+                    <th id="Th_Nombre" columna="Nombre">Nombre</th>
+                    <th id="Th_Apellido" columna="Apellido">Apellido</th>
+                    <th id="Th_Edad" columna="Edad">Edad</th>
+                    <th id="Th_Titulo" columna="Titulo">Titulo</th>
+                    <th id="Th_Facultad" columna="Facultad">Facultad</th>
+                    <th id="Th_Graduacion" columna="Graduacion">AñoGrad</th>
+                    <th id="Th_Equipo" columna="Equipo">Equipo</th>
+                    <th id="Th_Posicion" columna="Posicion">Posicion</th>
+                    <th id="Th_Goles" columna="Goles">CantGoles</th>
+                </tr>
+            </thead>
+            <tbody id="T_body">
+            </tbody>
+        </table>
+        <br>
+        <button id="btn_Agregar" type="button">Agregar</button>
+
+
+    </form>
+    <form id="FormTabla" style="margin-top: 10px;">
+        <label for="input_id">ID</label>
+        <input id="input_id" type="text">
+        <br>
+
+        <label for="input_name">Nombres</label>
+        <input id="input_name" type="text">
+        <br>
+
+        <label for="input_surname">Apellido</label>
+        <input id="input_surname" type="text">
+        <br>
+
+        <label for="input_edad">Edad</label>
+        <input id="input_edad" type="number">
+        <br>
+
+        <label for="input_tipo">Tipo</label>
+        <select id="input_tipo">
+            <option value="1">Futbolista</option>
+            <option value="2">Profesional</option>
+        </select>
+        <br>
+
+        <label for="input_equipo">Equipo</label>
+        <input id="input_equipo" type="text">
+        <br>
+
+        <label for="input_posicion">Posicion</label>
+        <input id="input_posicion" type="text">
+        <br>
+
+        <label for="input_cantGoles">CantGoles</label>
+        <input id="input_cantGoles" type="number">
+        <br>
+
+        <label for="input_titulo">Titulo</label>
+        <input id="input_titulo" type="text">
+        <br>
+
+        <label for="input_facultad">Facultad</label>
+        <input id="input_facultad" type="text">
+        <br>
+
+        <label for="input_añoGrad">AñoGrad</label>
+        <input id="input_añoGrad" type="number">
+        <br>
+
+        <button id="btn_alta">Alta</button>
+        <button id="btn_modificar">Modificar</button>
+        <button id="btn_eliminar">Eliminar</button>
+        <button id="btn_cancelar">Cancelar</button>
+
+    </form>
+</body>
+<script>
+    var stringEnunciado = '[{"id":1, "nombre":"Marcelo", "apellido":"Luque", "edad":45, "titulo":"Ingeniero", "facultad":"UTN", "a単oGraduacion":2002},{"id":2, "nombre":"Ramiro", "apellido":"Escobar", "edad":35, "titulo":"Medico", "facultad":"UBA", "a単oGraduacion":20012},{"id":3, "nombre":"Facundo", "apellido":"Cairo", "edad":30, "titulo":"Abogado", "facultad":"UCA", "a単oGraduacion":2017},{"id":4, "nombre":"Fernando", "apellido":"Nieto", "edad":18, "equipo":"Independiente", "posicion":"Delantero", "cantidadGoles":7},{"id":5, "nombre":"Manuel", "apellido":"Loza", "edad":20, "equipo":"Racing", "posicion":"Volante", "cantidadGoles":2},{"id":6, "nombre":"Nicolas", "apellido":"Serrano", "edad":23, "equipo":"Boca", "posicion":"Arquero", "cantidadGoles":0}]';
+
+    class Persona {
+        id;
+        nombre;
+        apellido;
+        edad;
+        constructor(p_id, p_nombre, p_apellido, p_edad) {
+            this.id = p_id;
+            this.nombre = p_nombre;
+            this.apellido = p_apellido;
+            this.p_edad = p_edad;
+        }
+    }
+
+    class Futbolista extends Persona {
+        equipo;
+        posicion;
+        cantidadGoles;
+        constructor(p_id, p_nombre, p_apellido, p_edad, equipo, posicion, cantidadGoles) {
+            super(p_id, p_nombre, p_apellido, p_edad,);
+            this.equipo = equipo;
+            this.posicion = posicion;
+            this.cantidadGoles = cantidadGoles
+        }
+    }
+
+    class Profesional extends Persona {
+        titulo;
+        facultad;
+        anioGraduacion;
+        constructor(p_id, p_nombre, p_apellido, p_edad, titulo, facultad, anioGraduacion) {
+            super(p_id, p_nombre, p_apellido, p_edad)
+            this.titulo = titulo;
+            this.facultad = facultad;
+            this.anioGraduacion = anioGraduacion;
+        }
+    }
+
+
+    class Modelo {
+        Personas;
+        constructor() { }
+    }
+
+    class Vista {
+        FormLista;
+        FormAbm;
+        constructor() {
+            this.FormLista = {
+                form: this.$("FormLista"),
+                filtro: this.$("Filtro"),
+                txtPromedio: this.$("Txt_Promedio"),
+                btnCalcular: this.$("Btn_Calcular"),
+                checkeboxes: {
+                    chkId: this.$("Chk_Id"),
+                    chkNombre: this.$("Chk_Nombre"),
+                    chkApellido: this.$("Chk_Apellido"),
+                    chkEdad: this.$("Chk_Edad"),
+                    chkEquipo: this.$("Chk_Equipo"),
+                    chkPosicion: this.$("Chk_Posicion"),
+                    chkGoles: this.$("Chk_Goles"),
+                    chkTitulo: this.$("Chk_Titulo"),
+                    chkFacultad: this.$("Chk_Facultad"),
+                    chkGraduacion: this.$("Chk_Graduacion")
+                },
+                tabla: {
+                    tabla: this.$("Table"),
+                    tbody: this.$("T_body"),
+                    thId: this.$("Th_Id"),
+                    thNombre: this.$("Th_Nombre"),
+                    thApellido: this.$("Th_Apellido"),
+                    thEdad: this.$("Th_Edad"),
+                    thTitulo: this.$("Th_Titulo"),
+                    thFacultad: this.$("Th_Facultad"),
+                    thGraduacion: this.$("Th_Graduacion"),
+                    thEquipo: this.$("Th_Equipo"),
+                    thPosicion: this.$("Th_Posicion"),
+                    thGoles: this.$("Th_Goles")
+                },
+                btnAgregar: this.$("btn_Agregar")
+            }
+
+        }
+
+        $(id) {
+            return document.getElementById(id);
+        }
+
+        OcultarPorChecks() {
+            let encabezados = this.FormLista.tabla.tabla.querySelectorAll("th");
+            encabezados.forEach(e => {
+                this.Ocultar(e);
+            });
+            let celdas = this.FormLista.tabla.tabla.querySelectorAll("td");
+            celdas.forEach(e => {
+                this.Ocultar(e);
+            });
+        }
+
+        Ocultar(e) {
+            if (e === "FormLista") {
+                this.FormLista.form.style.display = 'none';
+                return
+            }
+            if (e.getAttribute("columna") == "ID") {
+                if (this.FormLista.checkeboxes.chkId.checked) {
+                    e.style.display = '';
+                } else {
+                    e.style.display = 'none';
+                }
+            }
+            if (e.getAttribute("columna") == "Nombre") {
+                if (this.FormLista.checkeboxes.chkNombre.checked) {
+                    e.style.display = '';
+                } else {
+                    e.style.display = 'none';
+                }
+            }
+            if (e.getAttribute("columna") == "Apellido") {
+                if (this.FormLista.checkeboxes.chkApellido.checked) {
+                    e.style.display = '';
+                } else {
+                    e.style.display = 'none';
+                }
+            }
+            if (e.getAttribute("columna") == "Edad") {
+                if (this.FormLista.checkeboxes.chkEdad.checked) {
+                    e.style.display = '';
+                } else {
+                    e.style.display = 'none';
+                }
+            }
+            if (e.getAttribute("columna") == "Titulo") {
+                if (this.FormLista.checkeboxes.chkTitulo.checked) {
+                    e.style.display = '';
+                } else {
+                    e.style.display = 'none';
+                }
+            }
+            if (e.getAttribute("columna") == "Facultad") {
+                if (this.FormLista.checkeboxes.chkFacultad.checked) {
+                    e.style.display = '';
+                } else {
+                    e.style.display = 'none';
+                }
+            }
+            if (e.getAttribute("columna") == "Graduacion") {
+                if (this.FormLista.checkeboxes.chkGraduacion.checked) {
+                    e.style.display = '';
+                } else {
+                    e.style.display = 'none';
+                }
+            }
+            if (e.getAttribute("columna") == "Equipo") {
+                if (this.FormLista.checkeboxes.chkEquipo.checked) {
+                    e.style.display = '';
+                } else {
+                    e.style.display = 'none';
+                }
+            }
+            if (e.getAttribute("columna") == "Posicion") {
+                if (this.FormLista.checkeboxes.chkPosicion.checked) {
+                    e.style.display = '';
+                } else {
+                    e.style.display = 'none';
+                }
+            }
+            if (e.getAttribute("columna") == "Goles") {
+                if (this.FormLista.checkeboxes.chkGoles.checked) {
+                    e.style.display = '';
+                } else {
+                    e.style.display = 'none';
+                }
+            }
+        }
+
+        ObtenerEdades() {
+            const edades = document.querySelectorAll("td[columna='p_edad']");
+            const arrayEdades = [...edades].map(e => parseInt(e.innerText));
+
+            const sumaEdades = arrayEdades.reduce(function (acumulador, edad) {
+                return acumulador + edad;
+            }, 0);
+
+            const promedioEdad = sumaEdades / arrayEdades.length
+
+            this.FormLista.txtPromedio.value = Math.round(promedioEdad);
+
+        }
+
+        DibujarFilas(arrayPersonas) {
+
+            this.FormLista.tabla.tbody.innerHTML = '';
+            this.FormLista.txtPromedio.value = ""
+
+            arrayPersonas.forEach(e => {
+                const fila = document.createElement("tr")
+                fila.innerHTML = `
+                <td>${e.id}</td>
+                <td>${e.nombre}</td>
+                <td>${e.apellido}</td>
+                <td columna="p_edad">${e.p_edad}</td>
+                <td>${e.equipo || "N/A"}</td>
+                <td>${e.posicion || "N/A"}</td>
+                <td>${e.cantidadGoles || "N/A"}</td>
+                <td>${e.titulo || "N/A"}</td>
+                <td>${e.facultad || "N/A"}</td>
+                <td>${e.anioGraduacion || "N/A"}</td>
+                `
+                this.FormLista.tabla.tbody.appendChild(fila);
+            })
+        }
+
+
+    }
+
+    class Control {
+        Vista;
+        Modelo;
+        constructor(p_vista, p_modelo, stringEnunciado) {
+            this.Modelo = p_modelo;
+            this.Vista = p_vista;
+            this.CargaInicial(stringEnunciado);
+            this.RegistrarControladorChecks();
+            this.Vista.Control = this;
+        }
+
+        CargaInicial(cadena) {
+            let array = JSON.parse(cadena);
+            const arrayPersonas = array.map(
+                (x) => {
+                    if (x.equipo) {
+                        return new Futbolista(x.id, x.nombre, x.apellido, x.edad, x.equipo, x.posicion, x.cantidadGoles);
+                    } else {
+                        return new Profesional(x.id, x.nombre, x.apellido, x.edad, x.titulo, x.facultad, x.a単oGraduacion);
+                    }
+                }
+            );
+
+            this.Modelo.Personas = arrayPersonas;
+            this.Vista.DibujarFilas(arrayPersonas)
+        }
+
+
+        RegistrarControladorChecks() {
+            this.Vista.FormLista.checkeboxes.chkId.addEventListener("change", (e) => { this.Vista.OcultarPorChecks() });
+            this.Vista.FormLista.checkeboxes.chkApellido.addEventListener("change", (e) => { this.Vista.OcultarPorChecks() });
+            this.Vista.FormLista.checkeboxes.chkNombre.addEventListener("change", (e) => { this.Vista.OcultarPorChecks() });
+            this.Vista.FormLista.checkeboxes.chkFacultad.addEventListener("change", (e) => { this.Vista.OcultarPorChecks() });
+            this.Vista.FormLista.checkeboxes.chkEdad.addEventListener("change", (e) => { this.Vista.OcultarPorChecks() });
+            this.Vista.FormLista.checkeboxes.chkGoles.addEventListener("change", (e) => { this.Vista.OcultarPorChecks() });
+            this.Vista.FormLista.checkeboxes.chkGraduacion.addEventListener("change", (e) => { this.Vista.OcultarPorChecks() });
+            this.Vista.FormLista.checkeboxes.chkTitulo.addEventListener("change", (e) => { this.Vista.OcultarPorChecks() });
+            this.Vista.FormLista.checkeboxes.chkEquipo.addEventListener("change", (e) => { this.Vista.OcultarPorChecks() });
+            this.Vista.FormLista.checkeboxes.chkPosicion.addEventListener("change", (e) => { this.Vista.OcultarPorChecks() });
+            
+            this.Vista.FormLista.filtro.addEventListener("change", (e) => {
+                const value = e.target.value;
+
+                // 1 = Todos
+                // 2 = Futbolistas  
+                // 3 = Profesionales
+
+                const arrayPersonas = this.Modelo.Personas.filter(persona => {
+                    if (value == 1) {
+                        return true;
+                    } else if (value == 2) {
+                        return persona instanceof Futbolista;
+                    } else if (value == 3) {
+                        return persona instanceof Profesional;
+                    }
+                });
+
+                this.Vista.DibujarFilas(arrayPersonas)
+
+            })
+
+            this.Vista.FormLista.btnCalcular.addEventListener("click", (e) => {
+
+                this.Vista.ObtenerEdades();
+
+            })
+
+            this.Vista.FormLista.btnAgregar.addEventListener("click", (e) => {
+                this.Vista.Ocultar("FormLista")
+            })
+        }
+
+        RegistrarDobleClickFila(fila) {
+            fila.addEventListener("dbclick", (e) => { });
+        }
+
+    }
+
+    var modelo = new Modelo();
+    var vista = new Vista();
+    var control = new Control(vista, modelo, stringEnunciado);
+
+
+
+</script>
+
+</html>
