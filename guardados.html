@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="style.css" />
+  <title>Series Guardadas</title>
+</head>
+<body>
+  <main class="m-2">
+    <header>
+      <h1>Series Guardadas</h1>
+    </header>
+    <nav id="panel-izquierda">
+      <button onclick="window.location.href='./index.html'">Inicio</button>
+      <button onclick="window.location.href='./guardados.html'">Guardados</button>
+    </nav>
+    <section id="principal">
+      <div>
+        <button onclick="ordenarPorNombre()">Ordenar por Nombre</button>
+        <button onclick="ordenarPorIdioma()">Ordenar por Idioma</button>
+      </div><br>
+      <div id="series"></div>
+    </section>
+  </main>
+  <script src="serie.js"></script>
+  <script>
+    let series = [];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const datos = localStorage.getItem('seriesGuardadas');
+      if (datos) {
+        series = JSON.parse(datos).map(obj =>
+          new Serie(obj.id, obj.url, obj.name, obj.language, obj.genres, obj.image)
+        );
+        renderizar();
+      }
+    });
+
+    function renderizar() {
+      const contenedor = document.getElementById('series');
+      contenedor.innerHTML = '';
+      series.forEach(serie => {
+        contenedor.appendChild(serie.createHtmlElement());
+      });
+    }
+
+    function ordenarPorNombre() {
+      series.sort((a, b) => a.name.localeCompare(b.name));
+      renderizar();
+    }
+
+    function ordenarPorIdioma() {
+      series.sort((a, b) => a.language.localeCompare(b.language));
+      renderizar();
+    }
+  </script>
+</body>
+</html>
